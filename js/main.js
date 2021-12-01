@@ -139,6 +139,7 @@ function choose(data){
 }
 
 function end(){
+	alert("做了做了，在做了。。等等后续吧")
 	
 }
 
