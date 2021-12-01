@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class = "title">
+			<div>
+				事&nbsp;件&nbsp;名&nbsp;：<input id="title" value="大学"/>
+			</div>
+			<div>
+				事件按钮：<input id="title_button" value="入学"/>
+			</div>
+			
+		</div>
+		<div id="eventblock">
+			<div>
+				<div class="grad">
+					<div style="display:flex;">
+					<div>事件开始:</div><textarea class='eventname'></textarea><p style="color: #2C59AA;cursor: pointer;" onclick="remove(this)">&nbsp;&nbsp;&nbsp;X</p>
+					</div>
+					<div class = "radioall">
+						<div class="radiolist">
+							<div>
+								<div style="display:flex;"><p>选项</p><p>1</p><p style="color: #2C59AA;cursor: pointer;" onclick="removes(this)">&nbsp;&nbsp;&nbsp;X</p></div>
+								<table>
+									<tr><td style="width:100px!important"><div>选项名称</div></td><td><input class='radioname' /></td></tr>
+									<tr><td><div>选择语句</div></td><td><input class='radioend' /></td></tr>
+									<tr><td>奖惩机制</td>
+										<td>
+											<div>
+												<li>体质<input class='body' /></li>
+												<li>颜值<input class='face' /></li>
+												<li>智力<input class='brains' /></li>
+												<li>财力<input class='money' /></li>
+												<li>好感<input class='feel' /></li>
+											</div>
+										</td>
+									</tr>
+									<tr><td style="width:100px!important"></td><td style="width: 96.5%;"><button onclick="addchildevent(this)">添加子事件</button></td></tr>
+								</table>
+								<p style="display: none;">1</p>
+							</div>
+						</div>						
+					</div>
+					<button onclick="addradio(this)">添加选择</button>
+				</div>
+			</div>
+		</div>
+		<div>
+			<button id="add" onclick="addevent(this)">添加事件</button>
+		</div>
+			<button id="add" onclick="save()">保存</button>
+	</body>
+	<script>
+	
+	var radio = '<div><div style="display:flex;"><p>选项</p><p>1</p><p style="color: #2C59AA;cursor: pointer;" onclick="removes(this)">&nbsp;&nbsp;&nbsp;X</p></div><table><tr><td  style="width:100px!important"><div>选项名称</div></td><td><input  class="radioname"/></td></tr><tr><td><div>选择语句</div></td><td><input class="radioend"/></td></tr><tr><td>奖惩机制</td><td><div>	<li>体质<input class=\'body\' /></li><li>颜值<input class=\'face\' /></li><li>智力<input class=\'brains\' /></li><li>财力<input class=\'money\' /></li><li>好感<input class=\'feel\' /></li></div></td></tr><tr><td  style="width:100px!important"></td><td style="width: 96.5%;"><button onclick="addchildevent(this)">添加子事件</button></td></tr></table><p style="display:none;">1</p></div>'
+	
+	var childevent = '<div class="grad"><div style="display:flex;"><div>事件开始:</div><textarea  class="eventname"></textarea><p style="color: #2C59AA;cursor: pointer;" onclick="remove(this)">&nbsp;&nbsp;&nbsp;X</p></div><div class = "radioall"><div class="radiolist"><div><div style="display:flex;"><p>选项</p><p>1</p><p style="color: #2C59AA;cursor: pointer;" onclick="removes(this)">&nbsp;&nbsp;&nbsp;X</p></div><table><tr><td  style="width:100px!important"><div>选项名称</div></td><td><input  class="radioname"/></td></tr><tr><td><div>选择语句</div></td><td><input  class="radioend"/></td></tr><tr><td>奖惩机制</td><td><div><li>体质<input class=\'body\' /></li><li>颜值<input class=\'face\' /></li><li>智力<input class=\'brains\' /></li><li>财力<input class=\'money\' /></li><li>好感<input class=\'feel\' /></li></div></td></tr><tr><td  style="width:100px!important"></td><td style="width: 96.5%;"><button onclick="addchildevent(this)">添加子事件</button></td></tr></table><p style="display: none;">1</p></div></div></div><button onclick="addradio(this)">添加选择</button></div>'
+	
+	
+		function addevent(div){
+			divs = document.createElement('div');
+			cdiv =	document.createElement('div');
+			divs.appendChild(cdiv)
+			document.querySelector('#eventblock').appendChild(divs)
+			addchildevent(cdiv)
+			// var div = document.createElement('div')
+			// div.innerText = "事件名称";
+			// var txt = document.createElement('textarea')
+			// document.querySelector("#grad").appendChild(div)
+		}
+		
+		function addradio(div){
+			var radiv = div.previousElementSibling;
+			var listp = radiv.querySelectorAll('p');
+			var txt = listp[listp.length-1]
+			var num = Number(txt?txt.innerText:0)+1;
+			var radis = new String(radio)
+			radis =  radis.replace("<p>1</p>","<p>"+num+"</p>")
+			var ndiv = document.createElement('div')
+			ndiv.innerHTML = radis.replace("<p style=\"display:none;\">1</p>","<p style=\"display:none;\">"+num+"</p>")
+			ndiv.className="radiolist"
+			radiv.appendChild(ndiv)
+		}
+		
+		function save(){
+			var jasonlist = [];
+			divlist = document.querySelectorAll('#eventblock>div>.grad')
+			divlist.forEach(function(data){
+				jasonlist.push(createjason({},data))
+			})
+			console.log(JSON.stringify(jasonlist))
+			addCookie('event',JSON.stringify(jasonlist),0)
+			var title = document.querySelector("#title").value;
+			var title_button = document.querySelector("#title_button").value;
+			addCookie('title',title,0);
+			addCookie('title_button',title_button,0);
+			window.open('index.html')
+		}
+		
+		function createjason(jason,grad){
+			jason['evn'] = grad.querySelector('.eventname').value
+			jason['buttons'] = {}
+			var num = 1;
+			grad.querySelectorAll('.radioall>.radiolist').forEach(function(item){
+				if(item.parentElement.parentElement === grad){
+					jason.buttons['no'+num]={}
+					jason.buttons['no'+num]['txt'] = item.querySelector('.radioname').value;
+					jason.buttons['no'+num]['over'] = item.querySelector('.radioend').value;
+					jason.buttons['no'+num]['number'] = {}
+					jason.buttons['no'+num]['number']['body'] = item.querySelector('.body')? item.querySelector('.body').value:0;
+					jason.buttons['no'+num]['number']['face'] = item.querySelector('.face')? item.querySelector('.face').value:0;
+					jason.buttons['no'+num]['number']['brains'] = item.querySelector('.brains')? item.querySelector('.brains').value:0;
+					jason.buttons['no'+num]['number']['money'] = item.querySelector('.money')? item.querySelector('.money').value:0;
+					jason.buttons['no'+num]['number']['feel'] = item.querySelector('.feel')? item.querySelector('.feel').value:0;
+					
+					if(item.querySelector(".grad")){
+						var itemjaosn = createjason({},item.querySelector(".grad"))
+						jason.buttons['no'+num]['event'] = itemjaosn
+					}
+					num++;
+				}
+			})
+			return jason;
+		}
+		
+		function remove(div){
+			removeNode = div.parentElement.parentElement;
+			div.parentElement.parentElement.parentElement.removeChild(removeNode)
+		}
+		
+		function removes(div){
+			removeNode = div.parentElement.parentElement.parentElement;
+			div.parentElement.parentElement.parentElement.parentElement.removeChild(removeNode)
+		}
+		
+		function addchildevent(div){
+			var par = div.parentElement;
+			par.innerHTML = childevent
+		}
+		
+		function addCookie(objName, objValue, objHours) {
+		    var str = objName + "=" + escape(objValue); //编码
+		    if (objHours > 0) {//为0时不设定过期时间，浏览器关闭时cookie自动消失
+		        var date = new Date();
+		        var ms = objHours * 3600 * 1000;
+		        date.setTime(date.getTime() + ms);
+		        str += "; expires=" + date.toGMTString();
+		    }
+		    document.cookie = str;
+		}
+	</script>
+	<style>
+	textarea{
+		width: 90%;
+	}
+		.grad,.title>div{
+			height: 100%;
+			width: 100%;
+			display: block;
+			outline: none;
+			padding: 20px;
+			color: #fff;
+			text-transform: uppercase;
+			background: linear-gradient(135deg, #e570e7 0%,#79f1fc 100%);
+			box-sizing: border-box;
+			/* text-align: center; */
+			line-height: 20px;
+			font-family: roboto, helvetica;
+			font-weight: 200;
+			letter-spacing: 1px;
+			text-decoration: none;
+			box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+		/*border-radius: 50px;*/
+			-webkit-tap-highlight-color: transparent;
+			border-radius: 5px;
+			margin-top: 5px;
+		}
+		.radioall>.radiolist{
+			height: 100%;
+			width: 100%;
+			display: block;
+			outline: none;
+			padding: 20px;
+			color: #fff;
+			text-transform: uppercase;
+			background: linear-gradient(135deg, #ca0065 0%,#ffaa00 100%);
+			box-sizing: border-box;
+			/* text-align: center; */
+			line-height: 20px;
+			font-family: roboto, helvetica;
+			font-weight: 200;
+			letter-spacing: 1px;
+			text-decoration: none;
+			box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+		/*border-radius: 50px;*/
+			-webkit-tap-highlight-color: transparent;
+			border-radius: 5px;
+			margin-top: 5px;
+		}
+	button{
+		display: block; 
+		font-size: 14px; 
+		text-decoration: none!important; 
+		font-family: Helvetica, Arial, sans serif;
+		padding: 8px 12px; 
+		border-radius: 4px; 
+		font-weight:bold;
+		-moz-border-radius: 3px; 
+		box-shadow: inset 0px 0px 2px #fff;
+		-o-box-shadow: inset 0px 0px 2px #fff;
+		-webkit-box-shadow: inset 0px 0px 2px #fff;
+		-moz-box-shadow: inset 0px 0px 2px #fff;
+		margin-right: 3px;
+		margin-top: 6px;
+		width: auto;
+		cursor: pointer;
+		padding: 8px 20px;
+	}
+	button:active {
+		box-shadow: inset 0px 0px 3px #999;
+		-o-box-shadow: inset 0px 0px 3px #999;
+		-webkit-box-shadow: inset 0px 0px 3px #999;
+		-moz-box-shadow: inset 0px 0px 3px #999;
+	}
+	
+	button {
+		color: #4b1e24;
+		border: 1px solid #d96d7c;
+		background-image: -moz-linear-gradient(#f997b0, #f6677b);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6677b), to(#f997b0));
+		background-image: -webkit-linear-gradient(#f997b0, #f6677b);
+		background-image: -o-linear-gradient(#f997b0, #f6677b);
+		text-shadow: 1px 1px 1px #fdbcc7;
+		background-color: #f6677b;
+	}
+	button:hover {
+		border: 1px solid #c75964;
+		background-image: -moz-linear-gradient(#f6677b, #f997b0);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f997b0), to(#f6677b));
+		background-image: -webkit-linear-gradient(#f6677b, #f997b0);
+		background-image: -o-linear-gradient(#f6677b, #f997b0);
+		background-color: #f997b0;
+	}
+	button:active {border: 1px solid #ab3e4b;}
+	
+	</style>
+</html>

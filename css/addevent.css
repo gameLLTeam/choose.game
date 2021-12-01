@@ -1,0 +1,193 @@
+textarea {
+  width: 90%;
+}
+.grad,
+.title > div {
+  height: 100%;
+  width: 100%;
+  display: block;
+  outline: none;
+  padding: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #e570e7 0%, #79f1fc 100%);
+  box-sizing: border-box;
+  /* text-align: center; */
+  line-height: 20px;
+  font-family: roboto, helvetica;
+  font-weight: 200;
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+  /*border-radius: 50px;*/
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.label-name {
+  display: inline-block;
+  width: 70px;
+  margin-right: 10px;
+  text-align: justify;
+  text-justify: distribute-all-lines; /*ie6-8*/
+  text-align-last: justify; /* ie9*/
+  -moz-text-align-last: justify; /*ff*/
+  -webkit-text-align-last: justify; /*chrome 20+*/
+}
+.title input {
+  height: 30px;
+  width: 240px;
+  padding: 5px 10px;
+  border-style: none;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #dcdfe6;
+  outline: none;
+}
+
+.event-start {
+  display: flex;
+  align-items: center;
+}
+.event-start textarea {
+  height: 30px;
+  width: 700px;
+  padding: 5px 10px;
+  border-style: none;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #dcdfe6;
+  outline: none;
+}
+.event-start .event-close {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.radioall > .radiolist {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 20px;
+  margin-top: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ca0065 0%, #ffaa00 100%);
+  box-sizing: border-box;
+  /* text-align: center; */
+  line-height: 20px;
+  font-family: roboto, helvetica;
+  font-weight: 200;
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+  /*border-radius: 50px;*/
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 5px;
+}
+.radiolist .radio-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.radiolist .radio-close {
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  margin-left: 10px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+}
+.radiolist .radio-table tr {
+  display: block;
+  margin-bottom: 5px;
+}
+.radiolist .radio-table ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.radiolist .radio-table ul li {
+  margin-bottom: 10px;
+}
+.radiolist .radio-table input {
+  height: 20px;
+  width: 240px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  border-style: none;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #dcdfe6;
+  outline: none;
+}
+button {
+  display: block;
+  font-size: 14px;
+  text-decoration: none !important;
+  font-family: Helvetica, Arial, sans serif;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  -moz-border-radius: 3px;
+  box-shadow: inset 0px 0px 2px #fff;
+  -o-box-shadow: inset 0px 0px 2px #fff;
+  -webkit-box-shadow: inset 0px 0px 2px #fff;
+  -moz-box-shadow: inset 0px 0px 2px #fff;
+  margin-right: 3px;
+  margin-top: 6px;
+  width: auto;
+  cursor: pointer;
+  padding: 8px 20px;
+}
+button:active {
+  box-shadow: inset 0px 0px 3px #999;
+  -o-box-shadow: inset 0px 0px 3px #999;
+  -webkit-box-shadow: inset 0px 0px 3px #999;
+  -moz-box-shadow: inset 0px 0px 3px #999;
+}
+
+button {
+  color: #4b1e24;
+  border: 1px solid #d96d7c;
+  background-image: -moz-linear-gradient(#f997b0, #f6677b);
+  background-image: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(#f6677b),
+    to(#f997b0)
+  );
+  background-image: -webkit-linear-gradient(#f997b0, #f6677b);
+  background-image: -o-linear-gradient(#f997b0, #f6677b);
+  text-shadow: 1px 1px 1px #fdbcc7;
+  background-color: #f6677b;
+}
+button:hover {
+  border: 1px solid #c75964;
+  background-image: -moz-linear-gradient(#f6677b, #f997b0);
+  background-image: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(#f997b0),
+    to(#f6677b)
+  );
+  background-image: -webkit-linear-gradient(#f6677b, #f997b0);
+  background-image: -o-linear-gradient(#f6677b, #f997b0);
+  background-color: #f997b0;
+}
+button:active {
+  border: 1px solid #ab3e4b;
+}

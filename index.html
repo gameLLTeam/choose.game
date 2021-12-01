@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link type="text/css" href="css/index.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<table style="width: 100%;">
+		<tr style="width: 100%;">
+			<td style="width: 100%;" id="bolck" >
+		<div id="txtinput"></div>		
+			</td>
+		</tr>
+		<tr>
+			<td id="global">
+		<button id="start" class="red" onclick="startgame()">入学</button>
+		<button id="event" class="red" style="display:none" onclick="events()">寻找事件</button>
+		<button id="end" class="red" style="display:none" onclick="end()"> 看结局 </button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<button id= "restart" class="red" onclick="startgame()" style="display:none"></button>
+			</td>
+		</tr>
+		</table>
+		<button id="zdingyi" class="red" onclick="window.location.href='addevent.html'">自定义事件</button>
+	</body>
+	<script src="js/event.js"></script>
+	<script src="js/main.js"></script>
+
+</html>
